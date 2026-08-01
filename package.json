@@ -23,5 +23,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.23.0"
+    "react-native-iap": "^12.12.0"
   }
 }
