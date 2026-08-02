@@ -1,13 +1,13 @@
 # NYXSCREAM - PROJECT ROADMAP
 
-**Current Version:** 1.0 (Release Candidate)
-**Status:** ✅ Production Ready
+**Current Version:** 1.0 (Production Ready)
+**Status:** ✅ Complete
 
 ---
 
-## **✅ VERSION 1.0 - COMPLETE (CURRENT)**
+## ✅ VERSION 1.0 - COMPLETE (CURRENT)
 
-### **Core Features:**
+### Core Features:
 - ✅ User Authentication (Firebase)
 - ✅ Video Streaming (Mux)
 - ✅ Live Broadcasting
@@ -15,59 +15,68 @@
 - ✅ Creator Dashboard
 - ✅ Subscription Tiers (Void, Shadow, Abyss)
 - ✅ Payment System (Stripe + IAP)
-- ✅ Content Moderation
+- ✅ Content Moderation (AI + Human)
 - ✅ Watch History Tracking
-- ✅ Creator Verification (4 Tiers: Gray/Blue/Yellow/Golden)
+- ✅ Creator Verification (4 Tiers)
 - ✅ Push Notifications
 - ✅ Internationalization (8 languages)
 - ✅ NYX Academy Onboarding
 - ✅ NYX Token Economy
-- ✅ Streak Tracking System
+- ✅ Streak Tracking
 - ✅ Philanthropy Integration
-- ✅ Email Services (Password Reset)
+- ✅ Email Services
 - ✅ Profile Management
 - ✅ Settings & Preferences
-
-### **Tech Stack:**
-- React Native + Expo
-- Firebase v9 (Auth, Firestore)
-- React Navigation (Stack + Tabs)
-- Stripe (Payments)
-- Mux (Streaming)
-- Socket.io (Chat)
-- Expo Notifications
-
-### **Deployment:**
-- iOS: Ready for App Store
-- Android: Ready for Google Play
-- Web: Ready (index.html)
+- ✅ Admin Dashboard
+- ✅ Moderator Panel (AI + Human)
 
 ---
 
-## **🚀 VERSION 2.0 - PLANNED**
+## 🚀 VERSION 2.0 - PLANNED (2027)
 
-### **Q1 2027 - Enhanced Creator Tools:**
+### Q1 2027 - Enhanced Creator Tools:
 - 🎬 Advanced Video Editing
-- 📊 Detailed Creator Analytics Dashboard
+- 📊 Detailed Creator Analytics
 - 🎯 AI Recommendation Algorithm
 - 💬 Enhanced Comment System
 - 🎁 Gift/Tribute System
+- 👑 **ELITE: Theme Customization**
+  - Custom colors in streaming sections
+  - Personalized player themes
+  - Custom UI preferences
+  - Theme persistence
 
-### **Q2 2027 - Community Features:**
+### Q2 2027 - Community Features:
 - 👥 Creator Collaborations
-- 🤝 Community Guidelines Enforcement
+- 🤝 Community Guidelines
 - 📢 Announcement System
 - 🏆 Leaderboards & Rankings
-- 🎮 Gamification (Badges, Achievements)
+- 🎮 Gamification (Badges)
+- 👑 **ELITE: Direct Messaging**
+  - Message any user on platform
+  - Private message system
+  - Message history
+  - Notifications
+- 🔒 **PRIVACY: Chat Controls (All Users)**
+  - Hide chat option
+  - Lock chat (invite-only)
+  - Chat moderation
+  - Privacy settings
 
-### **Q3 2027 - Monetization Expansion:**
+### Q3 2027 - Monetization Expansion:
 - 💰 Sponsorship Marketplace
 - 🛍️ Merchandise Integration
 - 🎟️ Premium Event Access
 - 🎪 Virtual Meetups
 - 💸 Affiliate Program
+- 👑 **ELITE: Account Unbanning Vote**
+  - Vote on banned account appeals
+  - Consensus-based unbanning
+  - 80% Elite approval required
+  - 30-day voting period
+  - Community-driven moderation
 
-### **Q4 2027 - Web Platform:**
+### Q4 2027 - Web Platform:
 - 🌐 Full Web App (React)
 - 📱 Responsive Design
 - ⚡ Progressive Web App (PWA)
@@ -76,9 +85,9 @@
 
 ---
 
-## **🔮 VERSION 3.0 - FUTURE**
+## 🔮 VERSION 3.0 - FUTURE
 
-### **Advanced Features:**
+### Advanced Features:
 - 🤖 AI Content Moderation v2
 - 🎨 Customizable Creator Profiles
 - 🌍 Creator Fund & Revenue Sharing
@@ -92,54 +101,111 @@
 
 ---
 
-## **📋 DEVELOPMENT PRIORITIES**
+## 📋 DEVELOPMENT PRIORITIES
 
-### **High Priority (Next 3 months):**
-- [ ] Complete V1 testing & bug fixes
+### High Priority (Next 3 months):
+- [ ] V1 testing & bug fixes
 - [ ] Deploy to App Stores
 - [ ] Gather user feedback
 - [ ] Fix performance issues
-- [ ] Add more languages (V2: Korean, Italian, Turkish)
+- [ ] Add more languages (Korean, Italian, Turkish)
 
-### **Medium Priority (3-6 months):**
+### Medium Priority (3-6 months):
 - [ ] Creator analytics dashboard
 - [ ] AI recommendations
 - [ ] Gift system
 - [ ] Sponsorship platform
+- [ ] Theme customization (Elite)
+- [ ] Direct messaging (Elite)
+- [ ] Chat privacy controls
 
-### **Lower Priority (6+ months):**
-- [ ] Web platform rebuild
+### Lower Priority (6+ months):
+- [ ] Web platform
 - [ ] Advanced monetization
 - [ ] Enterprise features
+- [ ] Unbanning vote system (Elite)
 
 ---
 
-## **🎯 SUCCESS METRICS - V1**
+## 🎯 SUCCESS METRICS
 
-**Target by End 2026:**
+### V1 (By End 2026):
 - 100K active users
 - 10K creators
 - $100K monthly revenue
 - 50M monthly views
 - 95% uptime
-- <2s load time
+
+### V2 (By End 2027):
+- 500K active users
+- 50K creators
+- $500K monthly revenue
+- 250M monthly views
+- 99% uptime
+- 40% Elite adoption
 
 ---
 
-## **💡 FEATURE REQUESTS & FEEDBACK**
+## 👑 ELITE FEATURES (V2.0)
 
-Have an idea? Send it to:
-📧 feature-requests@nyxscream.dev
+### Theme Customization
+- Customize all streaming sections
+- Personal player themes
+- UI customization
+- Per-stream theme switching
+- Settings saved to profile
+
+### Direct Messaging
+- Message any user platform-wide
+- Private conversations
+- Message history & search
+- Read receipts
+- Notification system
+
+### Account Unbanning Vote
+- Vote on banned account appeals
+- Review appeal details
+- 80% Elite consensus required
+- 30-day voting window
+- Community-driven moderation
+
+### Chat Privacy (All Users)
+- Hide chat during streams
+- Lock chat (invite-only)
+- Whitelist specific users
+- Moderation tools
+- Privacy-first streaming
 
 ---
 
-## **📞 ROADMAP UPDATES**
+## 📅 TIMELINE
 
-We update this roadmap quarterly. Follow us:
-🐦 @NyxScreamApp
-📧 updates@nyxscream.dev
+2026
+├── Q1-Q3: V1.0 Development ✅
+└── Q4: V1.0 Launch ✅
+
+2027
+├── Q1: Theme Customization + Analytics
+├── Q2: Direct Messaging + Community
+├── Q3: Unbanning Votes + Monetization
+└── Q4: Web Platform
+
+2028+
+└── V3.0: Enterprise Features
 
 ---
 
-**Developed with 💜 by Isaac Solomon Robert**
-**NyxScream © 2026 - Where Darkness Meets Sound**
+## 💡 FEATURE REQUESTS
+
+Have ideas? Email: feature-requests@nyxscream.dev
+
+**User-Requested Features Now in V2.0:**
+✅ Elite theme customization
+✅ Elite direct messaging
+✅ Chat privacy controls
+✅ Community unbanning votes
+
+---
+
+**NyxScream © 2026**
+**Tagline: Where Darkness Meets Sound**
