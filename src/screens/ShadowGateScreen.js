@@ -121,6 +121,12 @@ export default function ShadowGateScreen({ navigation }) {
               )}
             </TouchableOpacity>
 
+            {isLogin && (
+              <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
+                <Text style={styles.forgotText}>Forgot password?</Text>
+              </TouchableOpacity>
+            )}
+
             <TouchableOpacity onPress={() => setIsLogin(!isLogin)}>
               <Text style={styles.toggleText}>
                 {isLogin
@@ -143,96 +149,19 @@ export default function ShadowGateScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: NYXSCREAM.void
-  },
-  scrollView: {
-    flex: 1,
-    paddingHorizontal: 20,
-    paddingVertical: 30
-  },
-  headerSection: {
-    alignItems: 'center',
-    marginBottom: 40
-  },
-  logo: {
-    fontSize: 36,
-    fontWeight: '900',
-    color: NYXSCREAM.scream,
-    letterSpacing: 3,
-    marginBottom: 10
-  },
-  tagline: {
-    fontSize: 14,
-    color: NYXSCREAM.electric,
-    letterSpacing: 2,
-    fontStyle: 'italic'
-  },
-  formCard: {
-    backgroundColor: NYXSCREAM.shadow,
-    borderWidth: 2,
-    borderColor: NYXSCREAM.scream,
-    borderRadius: 12,
-    padding: 25,
-    marginBottom: 30
-  },
-  formTitle: {
-    fontSize: 18,
-    fontWeight: '900',
-    color: NYXSCREAM.ghost,
-    letterSpacing: 2,
-    marginBottom: 20,
-    textAlign: 'center'
-  },
-  input: {
-    backgroundColor: NYXSCREAM.void,
-    borderWidth: 1,
-    borderColor: NYXSCREAM.nyx,
-    color: NYXSCREAM.ghost,
-    paddingVertical: 14,
-    paddingHorizontal: 15,
-    borderRadius: 6,
-    marginBottom: 15,
-    fontFamily: 'monospace'
-  },
-  authButton: {
-    backgroundColor: NYXSCREAM.scream,
-    paddingVertical: 16,
-    borderRadius: 6,
-    alignItems: 'center',
-    marginBottom: 15
-  },
-  authButtonText: {
-    color: NYXSCREAM.void,
-    fontWeight: '900',
-    fontSize: 16,
-    letterSpacing: 2
-  },
-  toggleText: {
-    color: NYXSCREAM.electric,
-    textAlign: 'center',
-    fontSize: 12,
-    textDecorationLine: 'underline',
-    letterSpacing: 0.5
-  },
-  infoSection: {
-    backgroundColor: 'rgba(157, 0, 255, 0.1)',
-    borderWidth: 1,
-    borderColor: NYXSCREAM.nyx,
-    borderRadius: 8,
-    padding: 20,
-    marginBottom: 30
-  },
-  infoTitle: {
-    color: NYXSCREAM.ghost,
-    fontSize: 14,
-    fontWeight: '900',
-    marginBottom: 10
-  },
-  infoText: {
-    color: NYXSCREAM.mist,
-    fontSize: 12,
-    lineHeight: 20
-  }
+  container: { flex: 1, backgroundColor: NYXSCREAM.void },
+  scrollView: { flex: 1, paddingHorizontal: 20, paddingVertical: 30 },
+  headerSection: { alignItems: 'center', marginBottom: 40 },
+  logo: { fontSize: 36, fontWeight: '900', color: NYXSCREAM.scream, letterSpacing: 3, marginBottom: 10 },
+  tagline: { fontSize: 14, color: NYXSCREAM.electric, letterSpacing: 2, fontStyle: 'italic' },
+  formCard: { backgroundColor: NYXSCREAM.shadow, borderWidth: 2, borderColor: NYXSCREAM.scream, borderRadius: 12, padding: 25, marginBottom: 30 },
+  formTitle: { fontSize: 18, fontWeight: '900', color: NYXSCREAM.ghost, letterSpacing: 2, marginBottom: 20, textAlign: 'center' },
+  input: { backgroundColor: NYXSCREAM.void, borderWidth: 1, borderColor: NYXSCREAM.nyx, color: NYXSCREAM.ghost, paddingVertical: 14, paddingHorizontal: 15, borderRadius: 6, fontFamily: 'monospace', marginBottom: 15 },
+  authButton: { backgroundColor: NYXSCREAM.scream, paddingVertical: 16, borderRadius: 6, alignItems: 'center', marginBottom: 15 },
+  authButtonText: { color: NYXSCREAM.void, fontWeight: '900', fontSize: 16, letterSpacing: 2 },
+  forgotText: { color: NYXSCREAM.electric, textAlign: 'center', fontSize: 12, textDecorationLine: 'underline', marginBottom: 12 },
+  toggleText: { color: NYXSCREAM.electric, textAlign: 'center', fontSize: 12, textDecorationLine: 'underline' },
+  infoSection: { backgroundColor: 'rgba(157, 0, 255, 0.1)', borderWidth: 1, borderColor: NYXSCREAM.nyx, borderRadius: 8, padding: 20, marginBottom: 30 },
+  infoTitle: { color: NYXSCREAM.ghost, fontSize: 14, fontWeight: '900', marginBottom: 10 },
+  infoText: { color: NYXSCREAM.mist, fontSize: 12, lineHeight: 20 }
 });
