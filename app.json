@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "NyxScream",
+    "slug": "nyxscream",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/images/icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./src/assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0D0221"
+    },
+    "ios": {
+      "supportsTabletMode": true,
+      "bundleIdentifier": "com.nyxscream.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/images/icon.png",
+        "backgroundColor": "#0D0221"
+      },
+      "package": "com.nyxscream"
+    },
+    "web": {
+      "favicon": "./src/assets/images/icon.png"
+    }
+  }
+}
