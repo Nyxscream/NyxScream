@@ -309,20 +309,24 @@
 
 ### THE NYXSCREAM WAY:
 
-**Phase 1: Bootstrap (Current - 6 months)**
-- Revenue: Subscriptions + platform fees
-- Goal: $50K runway
-- Timeline: Self-fund first growth
+**Phase 1: Seed Round (Current - Month 3)**
+- Target: $2M (UPDATED!)
+- Structure: Lead $1.2M + Co-investors $800K
+- Valuation: $6M pre-money
+- Your equity post-seed: 67%
+- Investor equity: 33%
+- Use: Infrastructure ($600K), Team ($500K), Marketing ($400K), Legal ($150K), Reserve ($350K)
 
-**Phase 2: Friends & Family (6-12 months)**
-- Target: $500K-$1M seed
-- Pitch: "Ethical streaming, creator-first"
-- Governance: Creator council + investor board
-
-**Phase 3: Series A (12-18 months)**
+**Phase 2: Series A (Month 12-18)**
 - Target: $5M-$10M
+- Valuation: $20M+ (based on $5M Year 1 revenue)
 - Use: Engineering, support, marketing
-- Growth: 100K→1M users
+- Growth: 100K→500K creators
+
+**Phase 3: Series B (Month 24-30)**
+- Target: $20M+
+- Growth: 500K→2M creators
+- Expansion: International markets
 
 **Fundraising Values:**
 - ✅ Mission alignment
@@ -403,19 +407,19 @@
 **Phase 2: Content Seeding (Months 3-6)**
 - Top 50 creators = Launch Partners
 - 90/10 revenue split (3 months)
-- Budget: $50K
+- Budget: $100K (UPDATED from $50K)
 
 **Phase 3: Paid Acquisition (Months 6-12)**
 - TikTok: "Dark streaming" (targeted)
 - YouTube: Creator testimonials
 - Reddit: Niche subreddits
-- Budget: $100K
+- Budget: $200K (UPDATED from $100K)
 
 **Phase 4: Viral Moments (Months 12+)**
 - Creator events (24-hour streams)
 - Exclusive content
 - Partnerships
-- Budget: $200K
+- Budget: $400K (UPDATED from $200K)
 
 **Messaging:**
 - "Where you actually earn"
@@ -454,9 +458,9 @@
 **Acquisition Channels:**
 
 **1. Direct Outreach**
-- 500 creators identified
+- 1,000 creators identified (UPDATED from 500)
 - Personalized messages (not mass)
-- 90/10 revenue split incentive
+- 90/10 revenue split incentive (first 3 months)
 - Regular check-ins
 
 **2. Community Recruitment**
@@ -503,24 +507,24 @@
 
 ### THE NYXSCREAM WAY:
 
-**Growth Targets:**
-- Month 1: 5K creators
-- Month 3: 20K creators
-- Month 6: 50K creators
-- Month 12: 100K creators
-- Year 2: 250K creators
-- Year 3: 500K creators
+**Growth Targets (UPDATED with $2M capital):**
+- Month 1: 10K creators
+- Month 3: 50K creators (UPDATED from 20K)
+- Month 6: 100K creators (UPDATED from 50K)
+- Month 12: 200K creators (UPDATED from 100K)
+- Year 2: 500K creators
+- Year 3: 1M creators
 
 **Growth Formula:**
 - Organic (creators bringing viewers): 70%
 - Paid acquisition (ads): 20%
 - Viral (sharing content): 10%
 
-**Year 1 Targets:**
-- Creators: 100K
-- Viewers: 500K
-- Revenue: $3M
-- Active monthly: 200K
+**Year 1 Targets (UPDATED):**
+- Creators: 200K (UPDATED from 100K)
+- Viewers: 1M (UPDATED from 500K)
+- Revenue: $5M (UPDATED from $3M)
+- Active monthly: 500K (UPDATED from 200K)
 
 **Churn Management:**
 - Survey every departing user
@@ -564,8 +568,25 @@ If YES → Build it.
 
 ---
 
+## 💰 UPDATED FINANCIAL SUMMARY
+
+| Year | Creators | Users | Revenue | Profit | Margin |
+|------|----------|-------|---------|--------|--------|
+| 1 | 200K | 1M | $5M | $3.3M | 66% |
+| 2 | 500K | 2.5M | $20M | $16.1M | 80% |
+| 3 | 1M | 5M | $75M | $67M | 89% |
+
+**Investor 33% equity:**
+- Year 1: $1.1M profit share
+- Year 2: $5.3M profit share
+- Year 3: $22M profit share
+- **Total: $28.4M return on $2M investment (14.2x)**
+
+---
+
 **NYXSCREAM - ORIGINAL DIFFERENTIATION STRATEGY**
 **Built Differently. Not Like Others.**
+**Now with $2M seed capital for aggressive, sustainable growth**
 
 Where Darkness Meets Sound.
 🌑✨💜

@@ -1,4 +1,4 @@
-# NYXSCREAM - FOLLOW-UP SEQUENCE
+# NYXSCREAM - FOLLOW-UP SEQUENCE ($2M Version)
 
 **The difference between funded and ghosted is persistence**
 **Follow up strategically, not desperately**
@@ -19,7 +19,7 @@
 
 ### **DAY 0: SEND INITIAL COLD EMAIL**
 
-[Use cold email template from Document 2]
+[Use cold email template from Document 4]
 
 **Timing:** Tuesday-Thursday, 9-10am their timezone
 **Goal:** Get initial response
@@ -36,7 +36,7 @@ Hi [First Name],
 
 Just wanted to check in on my previous email. No pressure if this isn't the right timing.
 
-Quick context: We're building NyxScream, a creator-first streaming platform that pays creators 70% (vs Twitch's 50%).
+Quick context: We're raising $2M to build creator-first streaming (70% creator split vs Twitch's 50%).
 
 I saw you led the Series A for [Company]—thought the mission alignment might resonate.
 
@@ -47,14 +47,14 @@ Otherwise, would you know anyone who should see this?
 Thanks,
 Isaac
 
-P.S. - If you want to check out the code: github.com/Nyxscream/NyxScream
+P.S. - Check out the code: github.com/Nyxscream/NyxScream
 
 ---
 
 **Why this works:**
 ✅ Acknowledges they're busy
 ✅ Gives new reason to engage (GitHub link)
-✅ Asks for intro (lower ask if not interested)
+✅ Asks for intro (lower ask)
 ✅ Soft, not pushy
 
 ---
@@ -67,11 +67,15 @@ P.S. - If you want to check out the code: github.com/Nyxscream/NyxScream
 
 Hi [First Name],
 
-Real quick—I realized you backed [Company], which raised $[X] at valuation $[Y].
+Realized you backed [Company], which raised $[X] at valuation $[Y].
 
 Our unit economics are similar: $2-5 CAC, $500+ LTV, 100:1 ratio.
 
 But here's what's different: We're profitable by Month 6, not chasing growth-at-all-costs.
+
+With $2M:
+- Year 1: 200K creators, $5M revenue, $3.3M profit (66% margin)
+- Year 3: 1M creators, $75M revenue, $67M profit (89% margin)
 
 I think you'd find the financial model interesting.
 
@@ -82,8 +86,8 @@ Isaac
 ---
 
 **Why this works:**
-✅ Shows you researched them (not generic)
-✅ Speaks their language (unit economics)
+✅ Shows you researched them
+✅ Speaks their language
 ✅ Shorter ask (10 min, not 15)
 ✅ Positions as value-add
 
@@ -100,10 +104,10 @@ Hi [First Name],
 Quick update: We just hit [milestone].
 
 [Pick one of:]
-- Launched on Product Hunt (250+ upvotes)
+- Launched on Product Hunt (500+ upvotes)
 - 50 creators signed up in first week
 - Got intro to [other investor who's interested]
-- GitHub hit 100 stars
+- GitHub hit 200 stars
 
 Thought you'd want to know since you track momentum in this space.
 
@@ -114,9 +118,9 @@ Isaac
 ---
 
 **Why this works:**
-✅ Shows momentum (reduces risk perception)
-✅ Creates FOMO (others are interested)
-✅ Gives update (not just nagging)
+✅ Shows momentum
+✅ Creates FOMO
+✅ Gives update (not nagging)
 ✅ Specific ask (call this week)
 
 ---
@@ -147,14 +151,15 @@ If not—completely understand. And if you know anyone who should see this, I'd 
 Thanks for considering.
 
 Isaac
-[Phone number]
+isaac@nyxscream.dev
++234 903 449 6867
 
 ---
 
 **Why this works:**
-✅ Acknowledges the silence (respects their time)
-✅ Makes it easy to say no (low pressure)
-✅ Specific asks (not vague)
+✅ Acknowledges silence
+✅ Respects their time
+✅ Specific asks
 ✅ Gives phone number (shows confidence)
 
 ---
@@ -180,7 +185,7 @@ Your friend emails investor:
 
 "[Investor], meet Isaac. He's building NyxScream, a creator-first streaming platform (70/30 split vs Twitch's 50/50).
 
-Production-ready app, profitable in Year 1, raising $1M.
+Production-ready app, raising $2M seed, profits in Year 1.
 
 I think you should take a meeting. Isaac, [Investor] knows this space intimately.
 
@@ -205,7 +210,8 @@ Are you open to a 20-min call this week? I can show you the app + run through th
 No pressure if the timing isn't right.
 
 Isaac
-[Phone number]
+isaac@nyxscream.dev
++234 903 449 6867
 github.com/Nyxscream/NyxScream
 
 ---
@@ -243,7 +249,7 @@ If anything changes, I'm here. And if you know anyone else who should see this, 
 
 ### **DAY 1: INITIAL DM**
 
-[Use Twitter DM template from Document 2]
+[Use Twitter DM template from Document 4]
 
 ---
 
@@ -292,7 +298,7 @@ If still no response:
 
 ### **Channel 3: Warm Intro**
 - Day 4: Ask mutual friend for intro
-- If they send intro, restart sequence
+- If they send, restart sequence
 
 ### **Channel 4: Physical Mail**
 - Day 8: Send printed pitch deck + personal note
@@ -311,17 +317,6 @@ If still no response:
 | [Name] | [Fund] | [Email] | ✅ Sent | ⏳ No response | ✅ Sent | ⏳ Waiting | Warm intro pending | Follow up in 2 weeks |
 | [Name 2] | [Fund 2] | [Email] | ✅ Sent | ✅ Responded | 📞 Call scheduled | - | Demo meeting | Thursday 2pm |
 
-**Columns:**
-- Investor Name
-- Fund name
-- Their email
-- Day 1 status (sent, response, etc.)
-- Day 3 status
-- Day 7 status
-- Day 14 status
-- Overall status (interested/ghosted/moved on/meeting scheduled)
-- Notes (why they might fund you, intro needed, etc.)
-
 ---
 
 ## 🎁 WHAT TO SEND IN FOLLOW-UPS
@@ -330,7 +325,7 @@ If still no response:
 
 ### **Send with Follow-up #2:**
 - 1-page business summary
-- 3-slide pitch deck (problem/solution/ask)
+- 3-slide pitch deck ($2M ask)
 - GitHub link
 
 ### **Send with Follow-up #3:**
@@ -340,7 +335,7 @@ If still no response:
 
 ### **Send by Day 14:**
 - Full pitch deck (20 slides)
-- Terms sheet (what you're raising)
+- Terms sheet ($2M structure)
 - Legal docs (cap table, equity breakdown)
 
 ---
@@ -366,7 +361,7 @@ If you were on the fence, this might move the needle. If you're interested, let'
 "A few investors are already reviewing. If you want to move forward, now's the time. Happy to share a copy of the investment terms."
 
 **When to use:** After 2+ serious investors show interest
-**Caution:** Only use if true (they'll verify)
+**Caution:** Only use if true
 
 ---
 
@@ -406,7 +401,7 @@ How can we help if you're considering investing?"
 **Best days to follow up:**
 ✅ Tuesday (inbox reset after Monday)
 ✅ Wednesday (mid-week action)
-✅ Thursday (end of week before they disappear)
+✅ Thursday (end of week before disappear)
 
 **Best times to follow up:**
 ✅ 9-10am (morning check-in)
@@ -433,14 +428,6 @@ How can we help if you're considering investing?"
 | Meeting rate | 5%+ of responses | [Meetings] / [Responded] |
 | Close rate | 30-50% of meetings | [Funded] / [Meetings] |
 
-**Example:**
-- 50 emails sent
-- 15 opened (30% open rate) ✅
-- 1 clicked link (6% CTR) ✅
-- 5 responded (33% response rate) ✅
-- 1 meeting booked (20% meeting rate) ✅
-- If they fund = 100% close rate ✅
-
 ---
 
 ## ❌ FOLLOW-UP MISTAKES TO AVOID
@@ -449,8 +436,8 @@ How can we help if you're considering investing?"
 "Did you get my email?" = Delete
 Use new angle each time
 
-❌ **Mistake 2: Waiting too long to follow up**
-"I'll wait a week before following up" = Too late
+❌ **Mistake 2: Waiting too long**
+"I'll wait a week" = Too late
 Follow up Day 3
 
 ❌ **Mistake 3: Following up too much**
@@ -465,41 +452,33 @@ Sound confident always
 "I guess you're not interested" = Petty
 Stay positive always
 
-❌ **Mistake 6: Not tracking**
-"Did I already email them?" = Looks bad
-Spreadsheet everything
+---
 
-❌ **Mistake 7: Generic attachments**
-Same doc to 50 people = Obvious
-Personalize each one
+## ✅ BEST PRACTICES
+
+✅ Every follow-up has a new angle
+✅ Always give them a reason to respond
+✅ Keep messages short (2-3 paragraphs)
+✅ Make next step crystal clear
+✅ Track everything in spreadsheet
+✅ Respect their time (max 4 follow-ups)
+✅ Move on after Day 21 with grace
+✅ Revisit with traction in 6 months
 
 ---
 
-## ✅ FOLLOW-UP BEST PRACTICES
-
-✅ **Every follow-up has a new angle**
-✅ **Always give them a reason to respond**
-✅ **Keep messages short (2-3 paragraphs)**
-✅ **Make next step crystal clear**
-✅ **Track everything in spreadsheet**
-✅ **Respect their time (max 4 follow-ups)**
-✅ **Move on after Day 21 with grace**
-✅ **Revisit with traction in 6 months**
-
----
-
-## 🎬 SAMPLE 21-DAY FOLLOW-UP SEQUENCE
+## 🎬 SAMPLE 21-DAY FOLLOW-UP SEQUENCE ($2M)
 
 **Investor: [Name], Fund: [Fund]**
 
 **Day 0:** Send cold email
-"I'm building NyxScream. Creators 70%, real transparency, profitable in Year 1."
+"I'm raising $2M for NyxScream. Creators 70%, real transparency, profitable in Year 1."
 
 **Day 3:** First follow-up
-"Checking in. GitHub: github.com/Nyxscream"
+"Checking in. GitHub: github.com/Nyxscream/NyxScream"
 
 **Day 7:** Value-add follow-up
-"Our unit economics: 100:1 LTV/CAC. Profitable by Month 6."
+"Our unit economics: 100:1 LTV/CAC. Year 1: 200K creators, $5M revenue, $3.3M profit."
 
 **Day 10:** Social proof follow-up
 "Just hit 100 creators. Momentum building."
@@ -508,7 +487,7 @@ Personalize each one
 "Are you interested or should I move on?"
 
 **Day 21:** Move on gracefully
-"No response = move on. Try again in 6 months when we have 10K creators."
+"No response = move on. Try again in 6 months when we have 10K+ creators."
 
 ---
 
@@ -533,7 +512,7 @@ Personalize each one
 
 ---
 
-**NyxScream Follow-Up Mastery**
+**NyxScream Follow-Up Mastery ($2M Edition)**
 **Persistence Without Desperation**
 
 🌑✨💜
