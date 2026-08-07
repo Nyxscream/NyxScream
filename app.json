@@ -11,6 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#0D0221"
     },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTabletMode": true,
       "bundleIdentifier": "com.nyxscream.app"
@@ -20,10 +23,16 @@
         "foregroundImage": "./src/assets/images/icon.png",
         "backgroundColor": "#0D0221"
       },
-      "package": "com.nyxscream"
+      "package": "com.nyxscream.app"
     },
     "web": {
       "favicon": "./src/assets/images/icon.png"
-    }
+    },
+    "sdkVersion": "57.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
   }
 }
