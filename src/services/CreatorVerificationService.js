@@ -1,187 +1,280 @@
-// Creator Verification Service - Tick Mark System
 import { db } from './firebase';
-import { doc, updateDoc, collection, addDoc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 
-export const TICK_LEVELS = {
-  GRAY: {
-    level: 0,
-    name: 'Unverified',
-    icon: '⚪',
+/**
+ * CreatorVerificationService
+ * 
+ * Handles creator tier system:
+ * - Tier 1: Emerging (1-5K followers)
+ * - Tier 2: Arrived (5-10K followers)
+ * - Tier 3: Rising (10K+ followers)
+ * - Tier 4: Legend (100K+ followers)
+ */
+
+export const CREATOR_TIERS = {
+  UNVERIFIED: 0,
+  EMERGING: 1,
+  ARRIVED: 2,
+  RISING: 3,
+  LEGEND: 4,
+};
+
+export const TIER_REQUIREMENTS = {
+  1: { 
+    minFollowers: 1000,
+    maxFollowers: 5000,
+    label: 'Emerging',
+    description: 'Building your audience',
+    moon: '🌙',
     color: '#6B6B6B',
-    features: ['basic_streaming', 'basic_chat']
   },
-  BLUE: {
-    level: 1,
-    name: 'Verified',
-    icon: '🔵',
-    color: '#00F0FF',
-    features: ['basic_streaming', 'basic_chat', 'analytics', 'monetization_basic', 'custom_category']
+  2: { 
+    minFollowers: 5000,
+    maxFollowers: 10000,
+    label: 'Arrived',
+    description: 'Established creator',
+    moon: '🌕',
+    color: '#E0E0E0',
   },
-  YELLOW: {
-    level: 2,
-    name: 'Premium',
-    icon: '🟡',
+  3: { 
+    minFollowers: 10000,
+    label: 'Rising',
+    description: 'Rapid growth phase',
+    moon: '🌙',
     color: '#FFD700',
-    features: ['basic_streaming', 'basic_chat', 'analytics', 'monetization_basic', 'custom_category', 'premium_tools', 'advanced_analytics', 'early_features', 'custom_branding']
   },
-  GOLDEN: {
-    level: 3,
-    name: 'Elite',
-    icon: '✨',
+  4: { 
+    minFollowers: 100000,
+    label: 'Legend',
+    description: 'Platform titan',
+    moon: '🌕',
     color: '#FFD700',
-    features: ['all_features', 'priority_support', 'custom_partnership', 'revenue_share', 'merchandise_integration', 'nft_drop', 'collab_priority', 'vip_badge']
-  }
+    glow: true,
+  },
 };
 
-export const getCreatorTick = async (userId) => {
-  try {
-    const userRef = doc(db, 'users', userId);
-    const userSnap = await getDoc(userRef);
-
-    if (!userSnap.exists()) return TICK_LEVELS.GRAY;
-
-    const userData = userSnap.data();
-    const tickLevel = userData.creatorVerification?.tickLevel || 'GRAY';
-
-    return TICK_LEVELS[tickLevel] || TICK_LEVELS.GRAY;
-  } catch (error) {
-    console.error('◉ Get tick failed:', error);
-    return TICK_LEVELS.GRAY;
-  }
+/**
+ * Get creator tier based on follower count
+ * @param {number} followers - Number of followers
+ * @returns {number} Tier number (0-4)
+ */
+export const getCreatorTier = (followers) => {
+  if (followers >= 100000) return CREATOR_TIERS.LEGEND;
+  if (followers >= 10000) return CREATOR_TIERS.RISING;
+  if (followers >= 5000) return CREATOR_TIERS.ARRIVED;
+  if (followers >= 1000) return CREATOR_TIERS.EMERGING;
+  return CREATOR_TIERS.UNVERIFIED;
 };
 
-export const requestVerification = async (userId, creatorData) => {
+/**
+ * Get tier info
+ * @param {number} tier - Tier number
+ * @returns {object} Tier configuration
+ */
+export const getTierInfo = (tier) => {
+  return TIER_REQUIREMENTS[tier] || null;
+};
+
+/**
+ * Check if creator is verified
+ * @param {number} tier - Tier number
+ * @returns {boolean} Is creator verified?
+ */
+export const isCreatorVerified = (tier) => {
+  return tier >= CREATOR_TIERS.EMERGING;
+};
+
+/**
+ * Calculate progress to next tier
+ * @param {number} followers - Current followers
+ * @returns {object} Progress info
+ */
+export const getProgressToNextTier = (followers) => {
+  const currentTier = getCreatorTier(followers);
+  
+  if (currentTier === CREATOR_TIERS.LEGEND) {
+    return {
+      currentTier: CREATOR_TIERS.LEGEND,
+      nextTier: null,
+      currentFollowers: followers,
+      nextTierRequires: null,
+      progress: 100,
+      remaining: 0,
+    };
+  }
+
+  const nextTier = currentTier + 1;
+  const nextTierInfo = TIER_REQUIREMENTS[nextTier];
+  const remaining = nextTierInfo.minFollowers - followers;
+  const progress = (followers / nextTierInfo.minFollowers) * 100;
+
+  return {
+    currentTier,
+    nextTier,
+    currentFollowers: followers,
+    nextTierRequires: nextTierInfo.minFollowers,
+    progress: Math.min(progress, 100),
+    remaining: Math.max(remaining, 0),
+  };
+};
+
+/**
+ * Update creator tier in Firestore
+ * @param {string} creatorId - Creator ID
+ * @param {number} followers - Follower count
+ */
+export const updateCreatorTier = async (creatorId, followers) => {
   try {
-    const applicationsRef = collection(db, 'verificationApplications');
+    const tier = getCreatorTier(followers);
+    const tierInfo = getTierInfo(tier);
+
+    const creatorRef = doc(db, 'creators', creatorId);
     
-    await addDoc(applicationsRef, {
-      userId: userId,
-      creatorName: creatorData.name,
-      channelDescription: creatorData.description,
-      followers: creatorData.followers || 0,
-      monthlyViews: creatorData.monthlyViews || 0,
-      contentQuality: creatorData.contentQuality || 0,
-      communityEngagement: creatorData.engagement || 0,
-      status: 'pending',
-      requestedAt: new Date(),
-      decidedAt: null,
-      verificationOfficer: null,
-      notes: null
+    await updateDoc(creatorRef, {
+      tier,
+      followers,
+      tierLabel: tierInfo?.label || 'Unverified',
+      tierUpdatedAt: new Date().toISOString(),
+      isVerified: isCreatorVerified(tier),
     });
 
-    // Update user status
-    const userRef = doc(db, 'users', userId);
-    await updateDoc(userRef, {
-      'creatorVerification.applicationStatus': 'pending',
-      'creatorVerification.appliedAt': new Date()
-    });
-
-    return { success: true, message: 'Application submitted' };
+    return { success: true, tier, tierInfo };
   } catch (error) {
-    console.error('◉ Request verification failed:', error);
+    console.error('Error updating creator tier:', error);
     return { success: false, error: error.message };
   }
 };
 
-export const approveVerification = async (userId, tickLevel) => {
+/**
+ * Get creator's current tier from Firestore
+ * @param {string} creatorId - Creator ID
+ * @returns {object} Creator tier data
+ */
+export const getCreatorTierFromDB = async (creatorId) => {
   try {
-    const userRef = doc(db, 'users', userId);
-    await updateDoc(userRef, {
-      'creatorVerification.tickLevel': tickLevel,
-      'creatorVerification.verifiedAt': new Date(),
-      'creatorVerification.applicationStatus': 'approved'
-    });
+    const creatorRef = doc(db, 'creators', creatorId);
+    const snapshot = await getDoc(creatorRef);
 
-    return { success: true, message: `Creator verified with ${TICK_LEVELS[tickLevel].name} tick` };
+    if (!snapshot.exists()) {
+      return { success: false, error: 'Creator not found' };
+    }
+
+    const data = snapshot.data();
+    return {
+      success: true,
+      tier: data.tier || 0,
+      followers: data.followers || 0,
+      tierLabel: data.tierLabel || 'Unverified',
+      isVerified: data.isVerified || false,
+      tierInfo: getTierInfo(data.tier),
+    };
   } catch (error) {
-    console.error('◉ Approve verification failed:', error);
+    console.error('Error fetching creator tier:', error);
     return { success: false, error: error.message };
   }
 };
 
-export const hasFeatureAccess = async (userId, feature) => {
+/**
+ * Batch update creators' tiers
+ * Used when follower counts change
+ * @param {array} creators - Array of {id, followers}
+ */
+export const batchUpdateCreatorTiers = async (creators) => {
   try {
-    const tick = await getCreatorTick(userId);
-    return tick.features.includes(feature) || tick.features.includes('all_features');
-  } catch (error) {
-    console.error('◉ Feature access check failed:', error);
-    return false;
-  }
-};
+    const updates = [];
 
-export const upgradeTick = async (userId, newTickLevel) => {
-  try {
-    const currentTick = await getCreatorTick(userId);
-    const newLevel = TICK_LEVELS[newTickLevel];
+    for (const creator of creators) {
+      const tier = getCreatorTier(creator.followers);
+      const tierInfo = getTierInfo(tier);
 
-    if (!newLevel) {
-      return { success: false, error: 'Invalid tick level' };
+      updates.push(
+        updateDoc(doc(db, 'creators', creator.id), {
+          tier,
+          followers: creator.followers,
+          tierLabel: tierInfo?.label || 'Unverified',
+          tierUpdatedAt: new Date().toISOString(),
+          isVerified: isCreatorVerified(tier),
+        })
+      );
     }
 
-    if (newLevel.level <= currentTick.level) {
-      return { success: false, error: 'Can only upgrade to higher tier' };
-    }
-
-    const userRef = doc(db, 'users', userId);
-    await updateDoc(userRef, {
-      'creatorVerification.tickLevel': newTickLevel,
-      'creatorVerification.upgradedAt': new Date()
-    });
-
-    return { success: true, message: `Upgraded to ${newLevel.name} tick` };
+    await Promise.all(updates);
+    return { success: true, updated: creators.length };
   } catch (error) {
-    console.error('◉ Upgrade tick failed:', error);
+    console.error('Error batch updating tiers:', error);
     return { success: false, error: error.message };
   }
 };
 
-export const getVerificationRequirements = (targetTickLevel) => {
-  const requirements = {
-    BLUE: {
-      minFollowers: 1000,
-      minMonthlyViews: 10000,
-      minContentQuality: 70,
-      minEngagement: 5,
-      description: 'Verified creator - Basic verification'
-    },
-    YELLOW: {
-      minFollowers: 10000,
-      minMonthlyViews: 100000,
-      minContentQuality: 85,
-      minEngagement: 10,
-      description: 'Premium creator - Enhanced features'
-    },
-    GOLDEN: {
-      minFollowers: 100000,
-      minMonthlyViews: 1000000,
-      minContentQuality: 95,
-      minEngagement: 15,
-      description: 'Elite creator - All features unlocked'
-    }
+/**
+ * Get all creators by tier
+ * @param {number} tier - Tier to filter by
+ * @returns {array} Creators at that tier
+ */
+export const getCreatorsByTier = async (tier) => {
+  try {
+    // This would require a Firestore query
+    // Placeholder for future implementation
+    return { success: false, error: 'Not implemented yet' };
+  } catch (error) {
+    console.error('Error fetching creators by tier:', error);
+    return { success: false, error: error.message };
+  }
+};
+
+/**
+ * Get badge metadata for display
+ * @param {number} tier - Creator tier
+ * @returns {object} Badge display data
+ */
+export const getBadgeMetadata = (tier) => {
+  const tierInfo = getTierInfo(tier);
+  
+  if (!tierInfo) {
+    return {
+      moon: '❌',
+      color: '#6B6B6B',
+      label: 'Unverified',
+      glow: false,
+    };
+  }
+
+  return {
+    moon: tierInfo.moon,
+    color: tierInfo.color,
+    label: tierInfo.label,
+    description: tierInfo.description,
+    glow: tierInfo.glow || false,
   };
-
-  return requirements[targetTickLevel] || null;
 };
 
-export const checkVerificationEligibility = (creatorStats, targetTick) => {
-  const requirements = getVerificationRequirements(targetTick);
+/**
+ * Format tier progress for display
+ * @param {number} followers - Current followers
+ * @returns {string} Formatted progress text
+ */
+export const formatTierProgress = (followers) => {
+  const progress = getProgressToNextTier(followers);
+  
+  if (progress.nextTier === null) {
+    return `Legend Status 👑`;
+  }
 
-  if (!requirements) return { eligible: false, reason: 'Invalid tick level' };
+  const nextTierInfo = getTierInfo(progress.nextTier);
+  return `${progress.remaining.toLocaleString()} followers to ${nextTierInfo.label}`;
+};
 
-  const checks = {
-    followers: creatorStats.followers >= requirements.minFollowers,
-    views: creatorStats.monthlyViews >= requirements.minMonthlyViews,
-    quality: creatorStats.contentQuality >= requirements.minContentQuality,
-    engagement: creatorStats.engagement >= requirements.minEngagement
-  };
-
-  const eligible = Object.values(checks).every(v => v);
-  const reasons = [];
-
-  if (!checks.followers) reasons.push(`Need ${requirements.minFollowers} followers`);
-  if (!checks.views) reasons.push(`Need ${requirements.minMonthlyViews} monthly views`);
-  if (!checks.quality) reasons.push(`Need ${requirements.minContentQuality}% content quality`);
-  if (!checks.engagement) reasons.push(`Need ${requirements.minEngagement}% engagement`);
-
-  return { eligible, requirements, checks, reasons };
+export default {
+  CREATOR_TIERS,
+  TIER_REQUIREMENTS,
+  getCreatorTier,
+  getTierInfo,
+  isCreatorVerified,
+  getProgressToNextTier,
+  updateCreatorTier,
+  getCreatorTierFromDB,
+  batchUpdateCreatorTiers,
+  getCreatorsByTier,
+  getBadgeMetadata,
+  formatTierProgress,
 };
