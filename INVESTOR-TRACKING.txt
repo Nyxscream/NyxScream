@@ -1,0 +1,459 @@
+NYXSCREAM INVESTOR TRACKING LOG
+================================
+
+Last Updated: August 9, 2026
+Goal: Track $2M mission-aligned seed funding
+Target Close: Week 4-6
+
+---
+
+TIER 1: PRIMARY IMPACT VCs
+==========================
+
+Investor: Omidyar Network
+Tier: 1
+Investment Focus: Impact Investing
+Contact Email: contact@omidyar.com
+Contact Name: [Research]
+Email Sent Date: PENDING
+Email Status: DRAFT
+Response Received: No
+Response Date: [blank]
+Meeting Scheduled: No
+Meeting Date: [blank]
+Meeting Time: [blank]
+Investor Type Confirmed: No
+Mission Aligned Score: 0
+Red Flags Found: None
+Current Status: QUEUE
+Notes: Start with this. Founded by eBay founder, strong mission focus.
+Follow-up Date: [blank]
+Follow-up Done: [blank]
+
+---
+
+Investor: Founders' Pledge
+Tier: 1
+Investment Focus: Founder-Led Impact
+Contact Email: hello@founderspledge.com
+Contact Name: [Research]
+Email Sent Date: PENDING
+Email Status: DRAFT
+Response Received: No
+Response Date: [blank]
+Meeting Scheduled: No
+Meeting Date: [blank]
+Meeting Time: [blank]
+Investor Type Confirmed: No
+Mission Aligned Score: 0
+Red Flags Found: None
+Current Status: QUEUE
+Notes: Founders giving to social causes. Perfect fit.
+Follow-up Date: [blank]
+Follow-up Done: [blank]
+
+---
+
+Investor: Anterra Capital
+Tier: 1
+Investment Focus: Social Enterprises
+Contact Email: info@anterracapital.com
+Contact Name: [Research]
+Email Sent Date: PENDING
+Email Status: DRAFT
+Response Received: No
+Response Date: [blank]
+Meeting Scheduled: No
+Meeting Date: [blank]
+Meeting Time: [blank]
+Investor Type Confirmed: No
+Mission Aligned Score: 0
+Red Flags Found: None
+Current Status: QUEUE
+Notes: Multiple social platform investments.
+Follow-up Date: [blank]
+Follow-up Done: [blank]
+
+---
+
+Investor: Khosla Impact
+Tier: 1
+Investment Focus: Impact Ventures
+Contact Email: impact@khosla.com
+Contact Name: [Research]
+Email Sent Date: PENDING
+Email Status: DRAFT
+Response Received: No
+Response Date: [blank]
+Meeting Scheduled: No
+Meeting Date: [blank]
+Meeting Time: [blank]
+Investor Type Confirmed: No
+Mission Aligned Score: 0
+Red Flags Found: None
+Current Status: QUEUE
+Notes: Vinod Khosla's impact fund. Founder-led.
+Follow-up Date: [blank]
+Follow-up Done: [blank]
+
+---
+
+Investor: Local Ventures
+Tier: 1
+Investment Focus: Community Impact
+Contact Email: hello@localventures.com
+Contact Name: [Research]
+Email Sent Date: PENDING
+Email Status: DRAFT
+Response Received: No
+Response Date: [blank]
+Meeting Scheduled: No
+Meeting Date: [blank]
+Meeting Time: [blank]
+Investor Type Confirmed: No
+Mission Aligned Score: 0
+Red Flags Found: None
+Current Status: QUEUE
+Notes: Explicitly community-first and founder-friendly.
+Follow-up Date: [blank]
+Follow-up Done: [blank]
+
+---
+
+Investor: Echoing Green
+Tier: 1
+Investment Focus: Social Entrepreneurs
+Contact Email: fellowship@echoinggreen.org
+Contact Name: [Research]
+Email Sent Date: PENDING
+Email Status: DRAFT
+Response Received: No
+Response Date: [blank]
+Meeting Scheduled: No
+Meeting Date: [blank]
+Meeting Time: [blank]
+Investor Type Confirmed: No
+Mission Aligned Score: 0
+Red Flags Found: None
+Current Status: QUEUE
+Notes: 40-year history backing mission founders.
+Follow-up Date: [blank]
+Follow-up Done: [blank]
+
+---
+
+TIER 2: FOUNDER-FRIENDLY + MISSION
+===================================
+
+Investor: Indie VC
+Tier: 2
+Investment Focus: Founder Autonomy
+Contact Email: hello@indievc.com
+Contact Name: [Research]
+Email Sent Date: PENDING
+Email Status: DRAFT
+Response Received: No
+Response Date: [blank]
+Meeting Scheduled: No
+Meeting Date: [blank]
+Meeting Time: [blank]
+Investor Type Confirmed: No
+Mission Aligned Score: 0
+Red Flags Found: None
+Current Status: QUEUE
+Notes: Anti-control, pro-founder model.
+Follow-up Date: [blank]
+Follow-up Done: [blank]
+
+---
+
+Investor: Stripe Atlas
+Tier: 2
+Investment Focus: Vetted Startups
+Contact Email: atlas@stripe.com
+Contact Name: [Research]
+Email Sent Date: PENDING
+Email Status: DRAFT
+Response Received: No
+Response Date: [blank]
+Meeting Scheduled: No
+Meeting Date: [blank]
+Meeting Time: [blank]
+Investor Type Confirmed: No
+Mission Aligned Score: 0
+Red Flags Found: None
+Current Status: QUEUE
+Notes: Recommends founder-friendly investors.
+Follow-up Date: [blank]
+Follow-up Done: [blank]
+
+---
+
+Investor: [Creator Fund]
+Tier: 3
+Investment Focus: Creator Economy
+Contact Email: TBD
+Contact Name: [Research]
+Email Sent Date: PENDING
+Email Status: DRAFT
+Response Received: No
+Response Date: [blank]
+Meeting Scheduled: No
+Meeting Date: [blank]
+Meeting Time: [blank]
+Investor Type Confirmed: No
+Mission Aligned Score: 0
+Red Flags Found: None
+Current Status: TODO
+Notes: Search for creators fund in your region.
+Follow-up Date: [blank]
+Follow-up Done: [blank]
+
+---
+
+TIER 3: INDIVIDUAL IMPACT ANGELS
+=================================
+
+Investor: [Wealthy Nigerian Founder 1]
+Tier: 3
+Investment Focus: Individual Angel
+Contact Email: TBD
+Contact Name: [Research]
+Email Sent Date: PENDING
+Email Status: DRAFT
+Response Received: No
+Response Date: [blank]
+Meeting Scheduled: No
+Meeting Date: [blank]
+Meeting Time: [blank]
+Investor Type Confirmed: No
+Mission Aligned Score: 0
+Red Flags Found: None
+Current Status: TODO
+Notes: Research successful Nigerian founders.
+Follow-up Date: [blank]
+Follow-up Done: [blank]
+
+---
+
+Investor: [Wealthy Nigerian Founder 2]
+Tier: 3
+Investment Focus: Individual Angel
+Contact Email: TBD
+Contact Name: [Research]
+Email Sent Date: PENDING
+Email Status: DRAFT
+Response Received: No
+Response Date: [blank]
+Meeting Scheduled: No
+Meeting Date: [blank]
+Meeting Time: [blank]
+Investor Type Confirmed: No
+Mission Aligned Score: 0
+Red Flags Found: None
+Current Status: TODO
+Notes: Research successful Nigerian founders.
+Follow-up Date: [blank]
+Follow-up Done: [blank]
+
+---
+
+Investor: [Impact Angel 1]
+Tier: 3
+Investment Focus: Individual Angel
+Contact Email: TBD
+Contact Name: [Research]
+Email Sent Date: PENDING
+Email Status: DRAFT
+Response Received: No
+Response Date: [blank]
+Meeting Scheduled: No
+Meeting Date: [blank]
+Meeting Time: [blank]
+Investor Type Confirmed: No
+Mission Aligned Score: 0
+Red Flags Found: None
+Current Status: TODO
+Notes: Find impact-focused angels on LinkedIn.
+Follow-up Date: [blank]
+Follow-up Done: [blank]
+
+---
+
+Investor: [Impact Angel 2]
+Tier: 3
+Investment Focus: Individual Angel
+Contact Email: TBD
+Contact Name: [Research]
+Email Sent Date: PENDING
+Email Status: DRAFT
+Response Received: No
+Response Date: [blank]
+Meeting Scheduled: No
+Meeting Date: [blank]
+Meeting Time: [blank]
+Investor Type Confirmed: No
+Mission Aligned Score: 0
+Red Flags Found: None
+Current Status: TODO
+Notes: Find impact-focused angels on LinkedIn.
+Follow-up Date: [blank]
+Follow-up Done: [blank]
+
+---
+
+TIER 4: INSTITUTIONS & FOUNDATIONS
+===================================
+
+Investor: [NGO Fund 1]
+Tier: 4
+Investment Focus: NGO Innovation
+Contact Email: TBD
+Contact Name: [Research]
+Email Sent Date: PENDING
+Email Status: DRAFT
+Response Received: No
+Response Date: [blank]
+Meeting Scheduled: No
+Meeting Date: [blank]
+Meeting Time: [blank]
+Investor Type Confirmed: No
+Mission Aligned Score: 0
+Red Flags Found: None
+Current Status: TODO
+Notes: Research NGO innovation funds.
+Follow-up Date: [blank]
+Follow-up Done: [blank]
+
+---
+
+Investor: [University Lab 1]
+Tier: 4
+Investment Focus: University Innovation
+Contact Email: TBD
+Contact Name: [Research]
+Email Sent Date: PENDING
+Email Status: DRAFT
+Response Received: No
+Response Date: [blank]
+Meeting Scheduled: No
+Meeting Date: [blank]
+Meeting Time: [blank]
+Investor Type Confirmed: No
+Mission Aligned Score: 0
+Red Flags Found: None
+Current Status: TODO
+Notes: MIT D-Lab, Stanford Social Entrepreneurship.
+Follow-up Date: [blank]
+Follow-up Done: [blank]
+
+---
+
+Investor: [Development Finance]
+Tier: 4
+Investment Focus: Development Finance
+Contact Email: TBD
+Contact Name: [Research]
+Email Sent Date: PENDING
+Email Status: DRAFT
+Response Received: No
+Response Date: [blank]
+Meeting Scheduled: No
+Meeting Date: [blank]
+Meeting Time: [blank]
+Investor Type Confirmed: No
+Mission Aligned Score: 0
+Red Flags Found: None
+Current Status: TODO
+Notes: IFC, USAID, UK Aid (Global South focus).
+Follow-up Date: [blank]
+Follow-up Done: [blank]
+
+---
+
+EMAIL STATUS LEGEND
+===================
+PENDING = Not sent yet
+DRAFT = Email written, ready to send
+SENT = Email sent, waiting for response
+BOUNCED = Email bounced back
+OPENED = Recipient opened email
+
+---
+
+RESPONSE STATUS LEGEND
+======================
+No = No response yet
+Auto Reply = Got automatic response
+Yes - Interested = Positive response
+Yes - Pass = Declined but polite
+Yes - Needs Info = Asked for more information
+No Response (7 days) = Time to follow up
+
+---
+
+MEETING STATUS LEGEND
+=====================
+No = Meeting not scheduled
+Scheduled = Meeting on calendar
+Completed = Meeting happened
+Rescheduled = New date set
+Cancelled = They cancelled
+
+---
+
+CURRENT STATUS LEGEND
+=====================
+QUEUE = Ready to send email
+ACTIVE = Email sent, waiting response
+INTERESTED = Positive response, exploring
+MEETING = Meeting scheduled/happened
+NEGOTIATING = Term sheet discussion
+CLOSE = Near final deal
+DONE = Deal signed
+PASS = Not a fit, moving on
+RESEARCH = Still researching investor
+
+---
+
+TRACKING BY WEEK
+================
+
+Week 1 (Aug 10-16): Initial Outreach
+- Send Tier 1 emails (6 investors)
+- Expected responses: 1-2
+- Follow up if no response by Aug 13
+
+Week 2 (Aug 17-23): Follow-ups + Meetings
+- Schedule meetings with interested investors
+- Send Tier 2 emails
+- Research Tier 3 angels
+
+Week 3 (Aug 24-30): Meetings + Negotiations
+- Have 2-3 initial meetings
+- Share pitch deck + business plan
+- Gauge interest level
+
+Week 4+ (Aug 31+): Deep Dives
+- Investor due diligence
+- Term sheet discussions
+- Final negotiations
+
+---
+
+SUCCESS METRICS
+===============
+[ ] Sent emails to all Tier 1 investors
+[ ] Received 20%+ response rate (expect 1-2 positive)
+[ ] Scheduled 2-3 initial meetings
+[ ] Identified "best fit" investor
+[ ] Received term sheet
+[ ] Closed deal
+
+---
+
+Document prepared: August 9, 2026
+Target: $2M mission-aligned seed funding
+Status: Starting outreach
+
+🌑✨💜
