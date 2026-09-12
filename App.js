@@ -1,6 +1,7 @@
 // Main App Entry Point - React Navigation Setup
 import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -65,8 +66,7 @@ class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: NYXSCREAM.void }}
-        >
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: NYXSCREAM.void }}>
           <Text style={{ color: NYXSCREAM.scream, fontSize: 18, fontWeight: 'bold' }}>⚠️ Something went wrong</Text>
           <Text style={{ color: NYXSCREAM.ghost, fontSize: 12, marginTop: 10, paddingHorizontal: 20, textAlign: 'center' }}>
             {this.state.error?.message || 'An unexpected error occurred'}
@@ -114,6 +114,15 @@ export const PaywallProvider = ({ children }) => {
   );
 };
 
+// ============================================
+// TAB ICON COMPONENT - Emoji handling
+// ============================================
+const TabIcon = ({ emoji, focused }) => (
+  <Text style={{ fontSize: 20, opacity: focused ? 1 : 0.6 }}>
+    {emoji}
+  </Text>
+);
+
 // Auth Stack (Login/Signup)
 const AuthStack = () => {
   return (
@@ -158,7 +167,7 @@ const MainTabs = () => {
         options={{
           title: 'Void',
           tabBarLabel: '🌑 Void',
-          tabBarIcon: ({ color }) => <Text style={{ fontSize: 20, color }}>🌑</Text>
+          tabBarIcon: ({ focused }) => <TabIcon emoji="🌑" focused={focused} />
         }}
       />
 
@@ -168,7 +177,7 @@ const MainTabs = () => {
         options={{
           title: 'Echo',
           tabBarLabel: '🔍 Echo',
-          tabBarIcon: ({ color }) => <Text style={{ fontSize: 20, color }}>🔍</Text>
+          tabBarIcon: ({ focused }) => <TabIcon emoji="🔍" focused={focused} />
         }}
       />
 
@@ -178,7 +187,7 @@ const MainTabs = () => {
         options={{
           title: 'Cast',
           tabBarLabel: '➕ Cast',
-          tabBarIcon: ({ color }) => <Text style={{ fontSize: 20, color }}>➕</Text>
+          tabBarIcon: ({ focused }) => <TabIcon emoji="➕" focused={focused} />
         }}
       />
 
@@ -188,7 +197,7 @@ const MainTabs = () => {
         options={{
           title: 'Scream',
           tabBarLabel: '🔴 Scream',
-          tabBarIcon: ({ color }) => <Text style={{ fontSize: 20, color }}>🔴</Text>
+          tabBarIcon: ({ focused }) => <TabIcon emoji="🔴" focused={focused} />
         }}
       />
 
@@ -198,7 +207,7 @@ const MainTabs = () => {
         options={{
           title: 'Shadow',
           tabBarLabel: '👤 Shadow',
-          tabBarIcon: ({ color }) => <Text style={{ fontSize: 20, color }}>👤</Text>
+          tabBarIcon: ({ focused }) => <TabIcon emoji="👤" focused={focused} />
         }}
       />
     </Tab.Navigator>
@@ -316,11 +325,13 @@ export default function App() {
 
   return (
     <ErrorBoundary>
-      <AuthProvider>
-        <PaywallProvider>
-          <AppContent />
-        </PaywallProvider>
-      </AuthProvider>
+      <SafeAreaProvider>
+        <AuthProvider>
+          <PaywallProvider>
+            <AppContent />
+          </PaywallProvider>
+        </AuthProvider>
+      </SafeAreaProvider>
     </ErrorBoundary>
   );
 }
