@@ -7,8 +7,15 @@ import { Platform } from 'react-native';
 // Install: npm install react-native-iap
 import * as RNIap from 'react-native-iap';
 
-const USE_MOCK = true; // Set to false when real keys ready
+// Use mock mode in development, real mode in production
+const USE_MOCK = process.env.NODE_ENV === 'development';
 const STRIPE_API_BASE = 'https://api.stripe.com/v1';
+
+// Validate backend URL
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+if (!BACKEND_URL && !USE_MOCK) {
+  console.warn('[PaymentService] REACT_APP_BACKEND_URL not configured. Verification will fail.');
+}
 
 // Product IDs for Google Play & App Store
 const IAP_PRODUCTS = {
@@ -30,10 +37,10 @@ const IAP_PRODUCTS = {
 export const initializeIAP = async () => {
   try {
     await RNIap.initConnection();
-    console.log('◉ IAP initialized');
+    console.log('[PaymentService] IAP initialized successfully');
     return { success: true };
   } catch (error) {
-    console.error('◉ IAP init failed:', error);
+    console.error('[PaymentService] IAP initialization failed:', error.message);
     return { success: false, error: error.message };
   }
 };
@@ -56,7 +63,7 @@ export const getAvailableProducts = async () => {
       }))
     };
   } catch (error) {
-    console.error('◉ Products fetch failed:', error);
+    console.error('[PaymentService] Products fetch failed:', error.message);
     return { success: false, error: error.message };
   }
 };
@@ -79,10 +86,10 @@ export const purchaseSubscriptionIAP = async (userId, tier) => {
 
     if (verified.success) {
       await updateDoc(doc(db, 'users', userId), {
-        'essence.tier': tier,
-        'essence.status': 'active',
-        'essence.moonCycleEnd': new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-        'essence.iapReceiptToken': purchase.transactionReceipt,
+        'subscription.tier': tier,
+        'subscription.status': 'active',
+        'subscription.expiresAt': new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        'subscription.receiptToken': purchase.transactionReceipt,
         updatedAt: new Date()
       });
 
@@ -102,16 +109,25 @@ export const purchaseSubscriptionIAP = async (userId, tier) => {
       return { success: false, error: 'Purchase verification failed' };
     }
   } catch (error) {
-    console.error('◉ IAP purchase failed:', error);
+    console.error('[PaymentService] IAP purchase failed:', error.message);
     return { success: false, error: error.message };
   }
 };
 
 // ========== VERIFY IAP PURCHASE ==========
 export const verifyIAPPurchase = async (userId, purchase) => {
+  if (USE_MOCK) {
+    console.log('[PaymentService] Using mock verification in development');
+    return { success: true };
+  }
+
+  if (!BACKEND_URL) {
+    console.warn('[PaymentService] Cannot verify purchase - BACKEND_URL not configured');
+    return { success: false, error: 'Backend not configured' };
+  }
+
   try {
-    // Send receipt to backend for verification
-    const response = await fetch('YOUR_BACKEND_URL/api/verify-receipt', {
+    const response = await fetch(`${BACKEND_URL}/api/verify-receipt`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -121,11 +137,15 @@ export const verifyIAPPurchase = async (userId, purchase) => {
       })
     });
 
+    if (!response.ok) {
+      throw new Error(`Verification failed with status ${response.status}`);
+    }
+
     const data = await response.json();
     return { success: data.verified };
   } catch (error) {
-    console.error('◉ Verification failed:', error);
-    return { success: false };
+    console.error('[PaymentService] Verification error:', error.message);
+    return { success: false, error: error.message };
   }
 };
 
@@ -147,8 +167,8 @@ export const restorePurchases = async (userId) => {
 
         if (tier) {
           await updateDoc(doc(db, 'users', userId), {
-            'essence.tier': tier,
-            'essence.status': 'active',
+            'subscription.tier': tier,
+            'subscription.status': 'active',
             updatedAt: new Date()
           });
         }
@@ -157,7 +177,7 @@ export const restorePurchases = async (userId) => {
 
     return { success: true, message: 'Purchases restored' };
   } catch (error) {
-    console.error('◉ Restore failed:', error);
+    console.error('[PaymentService] Restore failed:', error.message);
     return { success: false, error: error.message };
   }
 };
@@ -199,7 +219,7 @@ export const purchaseNYXTokensIAP = async (userId, amount) => {
 
     return { success: true, message: `${amount} NYX tokens purchased` };
   } catch (error) {
-    console.error('◉ Token purchase failed:', error);
+    console.error('[PaymentService] Token purchase failed:', error.message);
     return { success: false, error: error.message };
   }
 };
@@ -211,19 +231,28 @@ export const createOrUpdateCustomer = async (userId, email, name) => {
       return { success: true, customerId: `cus_mock_${userId}`, email: email };
     }
 
+    const stripeKey = process.env.REACT_APP_STRIPE_SECRET_KEY;
+    if (!stripeKey) {
+      throw new Error('Stripe API key not configured');
+    }
+
     const response = await fetch(`${STRIPE_API_BASE}/customers`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${process.env.REACT_APP_STRIPE_SECRET_KEY}`,
+        'Authorization': `Bearer ${stripeKey}`,
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       body: new URLSearchParams({ email: email, name: name })
     });
 
+    if (!response.ok) {
+      throw new Error(`Stripe error: ${response.statusText}`);
+    }
+
     const data = await response.json();
     return { success: true, customerId: data.id, email: data.email };
   } catch (error) {
-    console.error('◉ Stripe customer creation failed:', error);
+    console.error('[PaymentService] Stripe customer creation failed:', error.message);
     return { success: false, error: error.message };
   }
 };
@@ -243,10 +272,15 @@ export const processPayment = async (userId, amount, currency = 'USD', descripti
       return { success: true, transactionId: `pi_mock_${Date.now()}`, status: 'succeeded' };
     }
 
+    const stripeKey = process.env.REACT_APP_STRIPE_SECRET_KEY;
+    if (!stripeKey) {
+      throw new Error('Stripe API key not configured');
+    }
+
     const response = await fetch(`${STRIPE_API_BASE}/payment_intents`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${process.env.REACT_APP_STRIPE_SECRET_KEY}`,
+        'Authorization': `Bearer ${stripeKey}`,
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       body: new URLSearchParams({
@@ -256,10 +290,14 @@ export const processPayment = async (userId, amount, currency = 'USD', descripti
       })
     });
 
+    if (!response.ok) {
+      throw new Error(`Stripe error: ${response.statusText}`);
+    }
+
     const data = await response.json();
     return { success: data.status === 'succeeded', transactionId: data.id, status: data.status };
   } catch (error) {
-    console.error('◉ Payment processing failed:', error);
+    console.error('[PaymentService] Payment processing failed:', error.message);
     return { success: false, error: error.message };
   }
 };
@@ -277,7 +315,7 @@ export const getPaymentHistory = async (userId, limit = 20) => {
     payments.sort((a, b) => (b.processedAt || 0) - (a.processedAt || 0));
     return payments.slice(0, limit);
   } catch (error) {
-    console.error('◉ Payment history fetch failed:', error);
+    console.error('[PaymentService] Payment history fetch failed:', error.message);
     return [];
   }
 };
