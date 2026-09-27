@@ -31,6 +31,10 @@ import TokenDashboardScreen from './src/screens/TokenDashboardScreen';
 import AdminDashboardScreen from './src/screens/AdminDashboardScreen';
 import ModeratorPanelScreen from './src/screens/ModeratorPanelScreen';
 
+// Admin & Moderator Screens
+import AdminDashboardScreen from './src/screens/AdminDashboardScreen';
+import ModeratorPanelScreen from './src/screens/ModeratorPanelScreen';
+
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
