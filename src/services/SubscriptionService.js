@@ -1,174 +1,202 @@
-// Subscription Service - Tier Management
-import { db } from './firebase';
-import { doc, getDoc, updateDoc, collection, addDoc } from 'firebase/firestore';
+import { db, auth } from './Firebase';
+import {
+  collection,
+  doc,
+  getDoc,
+  setDoc,
+  onSnapshot,
+  updateDoc,
+  query,
+  where,
+  getDocs,
+} from 'firebase/firestore';
+import { httpsCallable } from 'firebase/functions';
+import { functions } from './Firebase';
 
-const TIER_HIERARCHY = {
-  none: { name: 'Free', price: 0, level: 0 },
-  void: { name: 'Void', price: 6.99, level: 1 },
-  shadow: { name: 'Shadow', price: 12.99, level: 2 },
-  abyss: { name: 'Abyss', price: 19.99, level: 3 }
-};
-
-export const getUserSubscription = async (userId) => {
-  try {
-    const userRef = doc(db, 'users', userId);
-    const userSnap = await getDoc(userRef);
-
-    if (!userSnap.exists()) return null;
-
-    const userData = userSnap.data();
-    const essenceTier = userData.essence?.tier || 'none';
-
-    return {
-      tier: essenceTier,
-      status: userData.essence?.status || 'inactive',
-      monthEnd: userData.essence?.moonCycleEnd || null,
-      stripeId: userData.essence?.stripeEssenceId || null
-    };
-  } catch (error) {
-    console.error('◉ Subscription fetch failed:', error);
-    return null;
-  }
-};
-
-export const hasAccessToTier = (userTier, requiredTier) => {
-  const userLevel = TIER_HIERARCHY[userTier]?.level || 0;
-  const requiredLevel = TIER_HIERARCHY[requiredTier]?.level || 0;
-  return userLevel >= requiredLevel;
-};
-
-export const upgradeSubscription = async (userId, newTier) => {
-  try {
-    const userRef = doc(db, 'users', userId);
-    const currentSubscription = await getUserSubscription(userId);
-
-    // Check if downgrading
-    const currentLevel = TIER_HIERARCHY[currentSubscription?.tier]?.level || 0;
-    const newLevel = TIER_HIERARCHY[newTier]?.level || 0;
-
-    if (newLevel < currentLevel) {
-      return { success: false, error: 'Cannot downgrade subscription' };
-    }
-
-    // Update subscription
-    await updateDoc(userRef, {
-      'essence.tier': newTier,
-      'essence.status': 'active',
-      'essence.moonCycleEnd': new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-      updatedAt: new Date()
-    });
-
-    // Log upgrade
-    const logsRef = collection(db, `users/${userId}/subscriptionLogs`);
-    await addDoc(logsRef, {
-      action: 'upgrade',
-      fromTier: currentSubscription?.tier || 'none',
-      toTier: newTier,
-      timestamp: new Date()
-    });
-
-    return { success: true, message: `Upgraded to ${TIER_HIERARCHY[newTier].name}` };
-  } catch (error) {
-    console.error('◉ Upgrade failed:', error);
-    return { success: false, error: error.message };
-  }
-};
-
-export const cancelSubscription = async (userId) => {
-  try {
-    const userRef = doc(db, 'users', userId);
-    await updateDoc(userRef, {
-      'essence.tier': 'none',
-      'essence.status': 'cancelled',
-      'essence.cancelledAt': new Date(),
-      updatedAt: new Date()
-    });
-
-    return { success: true, message: 'Subscription cancelled' };
-  } catch (error) {
-    console.error('◉ Cancellation failed:', error);
-    return { success: false, error: error.message };
-  }
-};
-
-export const getTierBenefits = (tier) => {
-  const benefits = {
-    none: {
-      adSupported: true,
-      resolution: '720p',
-      devices: 1,
-      offline: false
-    },
-    void: {
-      adSupported: true,
-      resolution: '720p',
-      devices: 1,
-      offline: false
-    },
-    shadow: {
-      adSupported: false,
-      resolution: '1080p',
-      devices: 2,
-      offline: true
-    },
-    abyss: {
-      adSupported: false,
-      resolution: '4K HDR',
-      devices: 4,
-      offline: true,
-      dolbyAtmos: true,
-      earlyAccess: true
-    }
+class SubscriptionServiceClass {
+  // Subscription tiers hierarchy
+  tiers = {
+    void: { level: 0, name: 'Free' },
+    shadow: { level: 1, name: 'Shadow' },
+    abyss: { level: 2, name: 'Abyss' },
   };
 
-  return benefits[tier] || benefits.none;
-};
+  /**
+   * Get user's current subscription
+   */
+  async getUserSubscription(userId) {
+    try {
+      const userDoc = await getDoc(doc(db, 'users', userId));
+      if (!userDoc.exists()) {
+        return { tier: 'void', status: 'none' };
+      }
 
-export const checkSubscriptionExpiry = async (userId) => {
-  try {
-    const userRef = doc(db, 'users', userId);
-    const userSnap = await getDoc(userRef);
-
-    if (!userSnap.exists()) return null;
-
-    const userData = userSnap.data();
-    const moonCycleEnd = userData.essence?.moonCycleEnd;
-
-    if (!moonCycleEnd) return { status: 'inactive' };
-
-    const now = new Date();
-    const endDate = new Date(moonCycleEnd);
-
-    if (now > endDate) {
-      // Subscription expired
-      await updateDoc(userRef, {
-        'essence.status': 'expired',
-        'essence.tier': 'none'
-      });
-      return { status: 'expired' };
+      const userData = userDoc.data();
+      return userData.subscription || { tier: 'void', status: 'none' };
+    } catch (error) {
+      console.error('Error getting subscription:', error);
+      return { tier: 'void', status: 'none' };
     }
-
-    const daysRemaining = Math.ceil((endDate - now) / (1000 * 60 * 60 * 24));
-    return { status: 'active', daysRemaining };
-  } catch (error) {
-    console.error('◉ Expiry check failed:', error);
-    return null;
   }
-};
 
-export const renewSubscription = async (userId, tier) => {
-  try {
-    const userRef = doc(db, 'users', userId);
-    await updateDoc(userRef, {
-      'essence.tier': tier,
-      'essence.status': 'active',
-      'essence.moonCycleEnd': new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-      updatedAt: new Date()
-    });
+  /**
+   * Subscribe to real-time subscription updates
+   * Calls callback whenever subscription changes
+   */
+  subscribeToUserSubscription(userId, callback) {
+    try {
+      const userRef = doc(db, 'users', userId);
+      
+      const unsubscribe = onSnapshot(userRef, (snapshot) => {
+        if (snapshot.exists()) {
+          const subscription = snapshot.data().subscription || { tier: 'void', status: 'none' };
+          callback(subscription);
+        }
+      });
 
-    return { success: true, message: 'Subscription renewed' };
-  } catch (error) {
-    console.error('◉ Renewal failed:', error);
-    return { success: false, error: error.message };
+      return unsubscribe;
+    } catch (error) {
+      console.error('Error subscribing to subscription:', error);
+      callback({ tier: 'void', status: 'none' });
+    }
   }
-};
+
+  /**
+   * Check if user has access to a specific tier
+   * tierRequired: 'shadow' or 'abyss'
+   */
+  async hasAccessToTier(userId, tierRequired) {
+    try {
+      const subscription = await this.getUserSubscription(userId);
+      const userTierLevel = this.tiers[subscription.tier]?.level || 0;
+      const requiredTierLevel = this.tiers[tierRequired]?.level || 0;
+
+      // User has access if their tier level >= required tier level
+      return userTierLevel >= requiredTierLevel;
+    } catch (error) {
+      console.error('Error checking tier access:', error);
+      return false;
+    }
+  }
+
+  /**
+   * Upgrade to a specific tier
+   * Opens Stripe Checkout in browser
+   */
+  async upgradeSubscription(tierName) {
+    try {
+      const user = auth.currentUser;
+      if (!user) {
+        throw new Error('User not authenticated');
+      }
+
+      // Validate tier
+      if (!['shadow', 'abyss'].includes(tierName)) {
+        throw new Error('Invalid tier name');
+      }
+
+      console.log(`Upgrading user ${user.uid} to ${tierName}`);
+
+      // Call Cloud Function to create Stripe Checkout session
+      const createCheckout = httpsCallable(functions, 'createCheckoutSession');
+      const result = await createCheckout({
+        tier: tierName,
+        userId: user.uid,
+      });
+
+      console.log('Checkout session created:', result.data);
+
+      return {
+        success: true,
+        checkoutUrl: result.data.checkoutUrl,
+        sessionId: result.data.sessionId,
+      };
+    } catch (error) {
+      console.error('Upgrade subscription error:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Cancel subscription
+   * User will lose premium access at end of current period
+   */
+  async cancelSubscription() {
+    try {
+      const user = auth.currentUser;
+      if (!user) {
+        throw new Error('User not authenticated');
+      }
+
+      console.log(`Cancelling subscription for user ${user.uid}`);
+
+      // Call Cloud Function to cancel at Stripe
+      const cancelSub = httpsCallable(functions, 'cancelSubscription');
+
+      const result = await cancelSub({});
+
+      console.log('Subscription cancelled:', result.data);
+
+      return {
+        success: true,
+        message: result.data.message,
+      };
+    } catch (error) {
+      console.error('Cancel subscription error:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Get subscription status (for display)
+   */
+  async getSubscriptionStatus(userId) {
+    try {
+      const subscription = await this.getUserSubscription(userId);
+
+      let statusText = 'Free Account';
+
+      if (subscription.status === 'active') {
+        statusText = `${subscription.tier.toUpperCase()} - Active`;
+      } else if (subscription.status === 'past_due') {
+        statusText = `${subscription.tier.toUpperCase()} - Payment Due`;
+      } else if (subscription.status === 'cancelled') {
+        statusText = 'Cancelled';
+      }
+
+      return {
+        tier: subscription.tier,
+        status: subscription.status,
+        statusText: statusText,
+        currentPeriodEnd: subscription.currentPeriodEnd,
+      };
+    } catch (error) {
+      console.error('Error getting subscription status:', error);
+      return {
+        tier: 'void',
+        status: 'none',
+        statusText: 'Free Account',
+      };
+    }
+  }
+
+  /**
+   * Get all payment history for user
+   */
+  async getPaymentHistory(userId) {
+    try {
+      const userDoc = await getDoc(doc(db, 'users', userId));
+      if (!userDoc.exists()) {
+        return [];
+      }
+
+      const userData = userDoc.data();
+      return userData.paymentHistory || [];
+    } catch (error) {
+      console.error('Error getting payment history:', error);
+      return [];
+    }
+  }
+}
+
+export const SubscriptionService = new SubscriptionServiceClass();
