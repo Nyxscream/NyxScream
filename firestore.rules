@@ -1,0 +1,125 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ==========================================
+    // USERS COLLECTION
+    // ==========================================
+    match /users/{userId} {
+      
+      // Users can read/write their own document
+      allow read: if request.auth.uid == userId;
+      
+      // Users can update specific fields only (not subscription/payment)
+      allow update: if request.auth.uid == userId &&
+        request.resource.data.keys().hasOnly([
+          'email',
+          'username',
+          'bio',
+          'avatar',
+          'notificationPreferences',
+          'privacySettings',
+          'theme',
+          'language',
+          'updatedAt'
+        ]);
+      
+      // Users can create their own document
+      allow create: if request.auth.uid == userId;
+      
+      // IMPORTANT: Block users from writing subscription field
+      // Only Cloud Functions and Admin SDK can update subscription
+      allow update: if request.auth.uid == userId &&
+        !('subscription' in request.resource.data.diff().affectedKeys());
+      
+      allow update: if request.auth.uid == userId &&
+        !('stripeCustomerId' in request.resource.data.diff().affectedKeys());
+      
+      allow update: if request.auth.uid == userId &&
+        !('paymentHistory' in request.resource.data.diff().affectedKeys());
+      
+      // Cloud Functions can write subscription data
+      allow write: if request.auth == null || 
+        request.auth.token.firebase['sign_in_provider'] == 'custom';
+      
+      // ==========================================
+      // NESTED: WATCH HISTORY
+      // ==========================================
+      match /watchHistory/{historyId} {
+        allow read, write: if request.auth.uid == userId;
+      }
+      
+      // ==========================================
+      // NESTED: NOTIFICATIONS
+      // ==========================================
+      match /notifications/{notificationId} {
+        allow read: if request.auth.uid == userId;
+        allow update: if request.auth.uid == userId &&
+          request.resource.data.keys().hasOnly(['read', 'readAt']);
+        allow delete: if request.auth.uid == userId;
+      }
+      
+      // ==========================================
+      // NESTED: PAYMENT HISTORY (READ ONLY)
+      // ==========================================
+      match /paymentHistory/{paymentId} {
+        allow read: if request.auth.uid == userId;
+        // No write access - only Cloud Functions can add
+        allow write: if false;
+      }
+    }
+    
+    // ==========================================
+    // STREAMS COLLECTION
+    // ==========================================
+    match /streams/{streamId} {
+      // Anyone can read published streams
+      allow read: if resource.data.status == 'live' || resource.data.status == 'archived';
+      
+      // Creator can update their own stream
+      allow update: if request.auth.uid == resource.data.creatorId;
+      
+      // Creator can create stream
+      allow create: if request.auth.uid == request.resource.data.creatorId;
+      
+      // ==========================================
+      // NESTED: CHAT MESSAGES
+      // ==========================================
+      match /messages/{messageId} {
+        // Anyone can read chat
+        allow read: if true;
+        
+        // Users can create own messages
+        allow create: if request.auth.uid == request.resource.data.userId;
+        
+        // Users can delete/update own messages
+        allow update, delete: if request.auth.uid == resource.data.userId;
+      }
+    }
+    
+    // ==========================================
+    // CREATORS COLLECTION
+    // ==========================================
+    match /creators/{creatorId} {
+      allow read: if true;
+      
+      allow update: if request.auth.uid == creatorId;
+      
+      allow create: if request.auth.uid == creatorId;
+    }
+    
+    // ==========================================
+    // ADMIN COLLECTION (ADMIN ONLY)
+    // ==========================================
+    match /admin/{adminId} {
+      allow read, write: if request.auth.token.isAdmin == true;
+    }
+    
+    // ==========================================
+    // CATCH-ALL: DENY BY DEFAULT
+    // ==========================================
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
